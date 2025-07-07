@@ -1,1 +1,147 @@
+Imports
+python
+Copy
+Edit
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+▶️ What this means:
+
+pandas is for handling data in table format
+
+matplotlib.pyplot is for making charts
+
+seaborn is for advanced, pretty charts
+These are the most common tools for data analysis.
+
+Loading the data
+python
+Copy
+Edit
+df = pd.read_csv("student_info.csv")
+▶️ What this means:
+This reads the student dataset from a CSV file and loads it into a dataframe called df, which acts like a table in memory so you can work with it easily.
+
+📊 Visualizations
+Now you made multiple graphs — I’ll explain each one line by line:
+
+1️⃣ Bar Chart: Average Math Score by Grade Level
+python
+Copy
+Edit
+avg_math = df.groupby("grade_level")["math_score"].mean()
+avg_math.plot(kind="bar", color="skyblue")
+plt.title("Average Math Score by Grade Level")
+plt.xlabel("Grade Level")
+plt.ylabel("Average Math Score")
+plt.show()
+▶️ What this does:
+
+Groups data by grade_level
+
+Calculates average math score for each grade
+
+Shows it as a sky blue bar chart
+
+Adds a title and axis labels
+
+Finally shows the chart
+
+Why? → It tells you which grades are doing better in math on average.
+
+2️⃣ Histogram: Study Hours
+python
+Copy
+Edit
+plt.hist(df["study_hours"], bins=10, color="green", edgecolor="black")
+plt.title("Study Hours Distribution")
+plt.xlabel("Study Hours")
+plt.ylabel("Number of Students")
+plt.show()
+▶️ What this does:
+
+Makes a histogram of the study_hours column
+
+Divides the hours into 10 bins
+
+Bars colored green with black edges
+
+Adds a title and labels
+
+Shows the chart
+
+Why? → You can see whether most students study a lot or just a little.
+
+3️⃣ Pie Chart: Gender Distribution
+python
+Copy
+Edit
+gender_counts = df["gender"].value_counts()
+plt.pie(gender_counts, labels=gender_counts.index, autopct="%.1f%%", startangle=90)
+plt.title("Gender Distribution")
+plt.show()
+▶️ What this does:
+
+Counts how many male/female students
+
+Makes a pie chart showing the proportions
+
+Adds labels and percentage labels
+
+Rotates the chart for better look
+
+Shows it
+
+Why? → Helps you see the gender balance in the dataset.
+
+4️⃣ Line Chart: Average Attendance Rate by Grade
+python
+Copy
+Edit
+avg_attendance = df.groupby("grade_level")["attendance_rate"].mean()
+avg_attendance.plot(kind="line", marker="o", color="purple")
+plt.title("Average Attendance Rate by Grade")
+plt.xlabel("Grade Level")
+plt.ylabel("Attendance Rate (%)")
+plt.grid(True)
+plt.show()
+▶️ What this does:
+
+Groups data by grade level
+
+Calculates mean attendance rate per grade
+
+Plots it as a purple line with circular markers
+
+Adds a title, axis labels, and a grid
+
+Shows it
+
+Why? → Lets you see whether higher grades attend school more or less.
+
+5️⃣ Bar Chart: Final Results by Grade Level
+python
+Copy
+Edit
+result_counts = df.groupby(["grade_level", "final_result"]).size().unstack(fill_value=0)
+result_counts.plot(kind="bar", stacked=True, figsize=(8,5), colormap="Accent")
+plt.title("Final Results by Grade Level")
+plt.xlabel("Grade Level")
+plt.ylabel("Number of Students")
+plt.show()
+▶️ What this does:
+
+Groups data by grade level and final result (pass/fail)
+
+Counts how many students in each group
+
+Reshapes it so you can stack bars
+
+Makes a stacked bar chart with colors
+
+Adds a title and labels
+
+Shows it
+
+Why? → Helps you see how many students passed or failed per grade.
